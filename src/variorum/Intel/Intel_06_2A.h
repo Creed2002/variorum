@@ -95,10 +95,6 @@ int variorum_PEBS_print_l(
 );
 
 
-int variorum_print_h_world(
-    void
-);
-
 int intel_cpu_fm_06_2a_get_features(
     void
 );

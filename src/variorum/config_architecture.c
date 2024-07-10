@@ -337,7 +337,6 @@ void variorum_init_func_ptrs()
     for (i = 0; i < P_NUM_PLATFORMS; i++)
     {
         g_platform[i].variorum_PEBS_print_latency = NULL;
-        g_platform[i].variorum_print_hello_world = NULL;
         g_platform[i].variorum_print_power_limit = NULL;
         g_platform[i].variorum_cap_socket_frequency_limit = NULL;
         g_platform[i].variorum_cap_best_effort_node_power_limit = NULL;

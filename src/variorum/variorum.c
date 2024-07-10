@@ -164,17 +164,43 @@ int variorum_monitoring(FILE *output)
 
 
 
-int variorum_print_hello_world(void)
-{
-    variorum_print_h_world();
-}
 
 
 
 int variorum_PEBS_print_latency(void)
 {
-    variorum_PEBS_print_l();
+    //variorum_PEBS_print_l();
+    int err = 0;
+    int i;
+    err = variorum_enter(__FILE__, __FUNCTION__, __LINE__);
+    if (err)
+    {
+        return -1;
+    }
+    for (i = 0; i < P_NUM_PLATFORMS; i++)
+    {
+        if (g_platform[i].variorum_PEBS_print_latency == NULL)
+        {
+            variorum_error_handler("Feature not yet implemented or is not supported",
+                                   VARIORUM_ERROR_FEATURE_NOT_IMPLEMENTED,
+                                   getenv("HOSTNAME"), __FILE__,
+                                   __FUNCTION__, __LINE__);
+            continue;
+        }
+        err = g_platform[i].variorum_PEBS_print_latency;
+        if (err)
+        {
+            return -1;
+        }
+    }
+    err = variorum_exit(__FILE__, __FUNCTION__, __LINE__);
+    if (err)
+    {
+        return -1;
+    }
+    return err;
 }
+
 
 
 

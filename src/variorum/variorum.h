@@ -182,7 +182,6 @@ int variorum_cap_each_gpu_power_limit(int gpu_power_limit);
 
 
 
-int variorum_print_hello_world(void);
 
 int variorum_PEBS_print_latency(void);
 

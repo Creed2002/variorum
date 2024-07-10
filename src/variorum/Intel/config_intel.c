@@ -72,7 +72,6 @@ int set_intel_func_ptrs(int idx)
     if (*g_platform[idx].arch_id == FM_06_2A)
     {
         g_platform[idx].variorum_PEBS_print_latency =  variorum_PEBS_print_l;
-        g_platform[idx].variorum_print_hello_world = variorum_print_h_world;
         g_platform[idx].variorum_print_power_limit =
             intel_cpu_fm_06_2a_get_power_limits;
         g_platform[idx].variorum_cap_each_socket_power_limit =
@@ -204,6 +203,7 @@ int set_intel_func_ptrs(int idx)
     // Broadwell 06_4F
     else if (*g_platform[idx].arch_id == FM_06_4F)
     {
+        g_platform[idx].variorum_PEBS_print_latency =  variorum_PEBS_print_l2;
         g_platform[idx].variorum_print_power_limit =
             intel_cpu_fm_06_4f_get_power_limits;
         g_platform[idx].variorum_cap_each_socket_power_limit =

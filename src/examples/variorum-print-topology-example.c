@@ -28,6 +28,7 @@ int main(int argc, char **argv)
         }
     }
 
-    variorum_print_topology();
+    //variorum_print_topology();
+    variorum_PEBS_print_latency();
     return 0;
 }

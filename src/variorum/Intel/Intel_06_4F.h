@@ -12,6 +12,10 @@
 /// @brief List of unique addresses for Broadwell Family/Model 4FH.
 struct broadwell_4f_offsets
 {
+    /// @brief Address for IA32_PEBS_ENABLE.
+    off_t ia32_pebs_enable;
+    /// @brief Address for MSR_PEBS_LD_LAT.
+    off_t msr_pebs_ld_lat;
     /// @brief Address for MSR_PLATFORM_INFO.
     off_t msr_platform_info;
     /// @brief Address for IA32_TIME_STAMP_COUNTER.
@@ -82,6 +86,10 @@ struct broadwell_4f_offsets
     off_t msr_config_tdp_level2;
     off_t msr_config_tdp_nominal;
 };
+
+int variorum_PEBS_print_l2(
+    void
+);
 
 int intel_cpu_fm_06_4f_get_power_limits(
     int long_ver

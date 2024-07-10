@@ -164,10 +164,7 @@ struct platform
     
 
 
-    int (*variorum_PEBS_print_latency)(void);
-
-    int (*variorum_print_hello_world)(void);
-
+    int (*variorum_PEBS_print_latency)(void); 
 
 
 

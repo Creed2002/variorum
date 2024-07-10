@@ -16,6 +16,8 @@
 
 static struct broadwell_4f_offsets msrs =
 {
+    .ia32_pebs_enable             = 0x3F1,
+    .msr_pebs_ld_lat              = 0x3F6,
     .msr_platform_info            = 0xCE,
     .ia32_time_stamp_counter      = 0x10,
     .ia32_perf_ctl                = 0x199,
@@ -72,6 +74,15 @@ static struct broadwell_4f_offsets msrs =
     .msrs_pcu_pmon_evtsel[2]      = 0xC32,
     .msrs_pcu_pmon_evtsel[3]      = 0xC33
 };
+
+int variorum_PEBS_print_l2(void)
+{
+    unsigned int PEBS_disable_bit = 1;
+    //PEBS_laten(msrs.ia32_pebs_enable, PEBS_disable_bit);
+    printf("IM HERE");
+    PEBS_laten(msrs.ia32_mperf, PEBS_disable_bit);
+    return 0;
+}
 
 int intel_cpu_fm_06_4f_get_power_limits(int long_ver)
 {
