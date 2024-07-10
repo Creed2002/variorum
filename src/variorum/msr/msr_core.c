@@ -545,9 +545,15 @@ int read_msr_by_idx(int dev_idx, off_t msr, uint64_t *val)
             getenv("HOSTNAME"), __FILE__, __LINE__, msr, msr);
 #endif
     rc = pread(*file_descriptor, (void *)val, (size_t)sizeof(uint64_t), msr);
+    if (rc == -1)
+    {
+        perror("Error found");
+        printf("file_descriptor = %d\n", *file_descriptor);
+        return 0;
+    }
     if (rc != sizeof(uint64_t))
     {
-        sprintf(variorum_error_msg, "Pread failed on dev_idx %d", dev_idx);
+        sprintf(variorum_error_msg, "Pread failed on dev_idx and rc  %d, %d", dev_idx, rc);
         variorum_error_handler(variorum_error_msg, VARIORUM_ERROR_MSR_READ,
                                getenv("HOSTNAME"), __FILE__, __FUNCTION__, __LINE__);
         free(variorum_error_msg);

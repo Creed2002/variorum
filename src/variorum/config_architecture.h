@@ -161,6 +161,18 @@ struct platform
     /// both sockets.
     ///
     /// @return Error code.
+    
+
+
+    int (*variorum_PEBS_print_latency)(void);
+
+    int (*variorum_print_hello_world)(void);
+
+
+
+
+
+
     int (*variorum_cap_gpu_power_ratio)(int gpu_power_ratio);
 
     /// @brief Function pointer to set a power limit to each socket.

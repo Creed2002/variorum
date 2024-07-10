@@ -49,7 +49,10 @@ struct fixed_counter_config
 /*****************************************/
 /* Fixed Counters Performance Monitoring */
 /*****************************************/
-
+int PEBS_laten(
+   off_t msr,
+   unsigned int PEBS_disable_bit 
+);
 /// @brief Initialize storage for fixed-function performance counter data, and
 /// store it on the heap.
 ///
@@ -284,6 +287,7 @@ int enable_pmc(
 /// @param [in] thread Unique logical processor identifier.
 /// @param [in] msrs_perfevtsel_ctrs Array of unique addresses for
 ///        PERFEVTSEL_CTRS.
+
 void set_pmc_ctrl_flags(
     uint64_t cmask,
     uint64_t flags,

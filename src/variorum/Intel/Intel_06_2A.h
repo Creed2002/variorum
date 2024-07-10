@@ -36,6 +36,10 @@ struct sandybridge_2a_offsets
     off_t ia32_package_therm_status;
     /// @brief Address for IA32_PACKAGE_THERM_INTERRUPT.
     off_t ia32_package_therm_interrupt;
+    /// @brief Address for IA32_PEBS_ENABLE.
+    off_t ia32_pebs_enable;
+    /// @brief Address for MSR_PEBS_LD_LAT.
+    off_t msr_pebs_ld_lat;
     /// @brief Address for IA32_FIXED_CTR_CTRL.
     off_t ia32_fixed_ctr_ctrl;
     /// @brief Address for IA32_PERF_GLOBAL_STATUS.
@@ -84,6 +88,15 @@ int intel_cpu_fm_06_2a_get_power_limits(
 
 int intel_cpu_fm_06_2a_cap_power_limits(
     int package_power_limit
+);
+
+int variorum_PEBS_print_l(
+    void
+);
+
+
+int variorum_print_h_world(
+    void
 );
 
 int intel_cpu_fm_06_2a_get_features(

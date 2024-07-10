@@ -160,6 +160,25 @@ int variorum_monitoring(FILE *output)
     return err;
 }
 
+
+
+
+
+int variorum_print_hello_world(void)
+{
+    variorum_print_h_world();
+}
+
+
+
+int variorum_PEBS_print_latency(void)
+{
+    variorum_PEBS_print_l();
+}
+
+
+
+
 int variorum_print_power_limit(void)
 {
     int err = 0;

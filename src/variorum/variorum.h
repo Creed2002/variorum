@@ -179,6 +179,15 @@ int variorum_cap_each_gpu_power_limit(int gpu_power_limit);
 ///
 /// @return 0 if successful or if feature has not been implemented or is
 /// not supported, otherwise -1
+
+
+
+int variorum_print_hello_world(void);
+
+int variorum_PEBS_print_latency(void);
+
+
+
 int variorum_print_verbose_power_limit(void);
 
 /// @brief Print power limits for all known domains in CSV format.

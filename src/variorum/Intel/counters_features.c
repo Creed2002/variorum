@@ -2,14 +2,16 @@
 // Variorum Project Developers. See the top-level LICENSE file for details.
 //
 // SPDX-License-Identifier: MIT
-
+//
+#include <inttypes.h>
+#include <misc_features.h>
+//
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
 #include <unistd.h>
-
 #include <clocks_features.h>
 #include <counters_features.h>
 #include <config_architecture.h>
@@ -41,6 +43,39 @@ int cpuid_num_pmc(void)
 /*****************************************/
 /* Fixed Counters Performance Monitoring */
 /*****************************************/
+
+int PEBS_laten(off_t msr, unsigned int PEBS_disable_bit)
+{
+    int ret = 0;
+    unsigned socket;
+    unsigned core = 0;
+    unsigned thread = 0;
+    unsigned nsockets;
+    uint64_t mask = 0;
+    uint64_t msr_val = 0;
+
+    variorum_get_topology(&nsockets, NULL, NULL, P_INTEL_CPU_IDX);
+
+    mask |= 1LL << PEBS_disable_bit;
+
+    for (socket = 0; socket < nsockets; socket++)
+    {
+        printf("socket = %d\n", socket);
+        printf("core = %d\n", core);
+        printf("thread = %d\n", thread);
+        printf("msr = %lx\n", msr);
+        printf("msr_val = %p (%#"PRIx64")\n", &msr_val, msr_val); 
+        ret = read_msr_by_coord(socket, core, thread, msr, &msr_val);
+    }
+    //write_msr_by_coord(unsigned socket, unsigned core, unsigned thread, off_t msr, uint64_t val)
+    //write_msr_by_coord(socket, 0, 0, msr, msr_val);
+    printf("HELLO WORLD!!!!!\n");
+    return 0;
+}
+
+
+
+
 
 void fixed_counter_storage(struct fixed_counter **ctr0,
                            struct fixed_counter **ctr1, struct fixed_counter **ctr2,
@@ -619,6 +654,8 @@ void print_verbose_perfmon_counter_data(FILE *writedest,
 ///
 /// @return 0 if successful, else -1 if number of general-purpose performance
 /// counters is less than 1.
+
+
 static int init_pmc(struct pmc *p, off_t *msrs_perfmon_ctrs)
 {
     unsigned nthreads = 0;

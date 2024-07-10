@@ -31,6 +31,8 @@ static struct sandybridge_2a_offsets msrs =
     .ia32_fixed_counters[0]       = 0x309,
     .ia32_fixed_counters[1]       = 0x30A,
     .ia32_fixed_counters[2]       = 0x30B,
+    .ia32_pebs_enable             = 0x3F1,
+    .msr_pebs_ld_lat              = 0x3F6,
     .ia32_fixed_ctr_ctrl          = 0x38D,
     .ia32_perf_global_status      = 0x38E,
     .ia32_perf_global_ctrl        = 0x38F,
@@ -330,6 +332,23 @@ int intel_cpu_fm_06_2a_get_clocks_json(json_t *get_clock_obj_json)
                          CORE);
     return 0;
 }
+
+int variorum_print_h_world(void)
+{
+    printf("Hello World\n");
+    return 0;
+}
+
+int variorum_PEBS_print_l(void)
+{
+    unsigned int PEBS_disable_bit = 1;
+    //PEBS_laten(msrs.ia32_pebs_enable, PEBS_disable_bit);
+    PEBS_laten(msrs.ia32_mperf, PEBS_disable_bit);
+    return 0;
+}
+
+
+
 
 int intel_cpu_fm_06_2a_get_power(int long_ver)
 {

@@ -20,7 +20,7 @@ int main(int argc, char **argv)
                 printf(usage, argv[0]);
                 return 0;
             case 'v':
-                printf("%s\n", variorum_get_current_version());
+                variorum_PEBS_print_latency();
                 return 0;
             default:
                 fprintf(stderr, usage, argv[0]);
