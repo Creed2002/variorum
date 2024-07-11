@@ -187,7 +187,7 @@ int variorum_PEBS_print_latency(void)
                                    __FUNCTION__, __LINE__);
             continue;
         }
-        err = g_platform[i].variorum_PEBS_print_latency;
+        err = g_platform[i].variorum_PEBS_print_latency();
         if (err)
         {
             return -1;

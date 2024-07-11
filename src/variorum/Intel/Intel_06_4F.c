@@ -79,7 +79,7 @@ int variorum_PEBS_print_l2(void)
 {
     unsigned int PEBS_disable_bit = 1;
     //PEBS_laten(msrs.ia32_pebs_enable, PEBS_disable_bit);
-    printf("IM HERE");
+    printf("IM HERE \n");
     PEBS_laten(msrs.ia32_mperf, PEBS_disable_bit);
     return 0;
 }
