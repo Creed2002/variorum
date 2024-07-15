@@ -161,8 +161,6 @@ static int init_PEBS(struct PEBS *evt, off_t *msrs_pebs)
 		evt->perfevtsel_counters3 = (uint64_t **) calloc(nthreads, sizeof(uint64_t *));
 		break;
     }
-    allocate_batch(PEBS_CONFIG, avail * nthreads);
-    switch (avail)
 }
 
 void enable_fixed_counters(off_t *msrs_fixed_ctrs, off_t msr1, off_t msr2)
