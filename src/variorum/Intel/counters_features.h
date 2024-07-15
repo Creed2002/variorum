@@ -35,6 +35,16 @@ struct fixed_counter
     uint64_t *overflow;
 };
 
+struct PEBS_counter
+{
+    uint64_t *enable;
+    uint64_t *ring_level;
+    uint64_t *anyThread;
+    uint64_t *pmi;
+    uint64_t **value;
+    uint64_t *overflow;
+};
+
 /// @brief Structure containing general information about the fixed-function
 /// performance counters on the platform.
 struct fixed_counter_config
@@ -52,6 +62,31 @@ struct fixed_counter_config
 int PEBS_laten(
    off_t msr,
    unsigned int PEBS_disable_bit 
+);
+
+void PEBS_counter_storage(
+    struct PEBS_counter **ctr0,
+    struct PEBS_counter **ctr1,
+    struct PEBS_counter **ctr2,
+    struct PEBS_counter **ctr3,
+    struct PEBS_counter **perfevtsel0,
+    struct PEBS_counter **perfevtsel1,
+    struct PEBS_counter **perfevtsel2,
+    struct PEBS_counter **perfevtsel3,
+    struct PEBS_counter **perfglobalctrl,
+    struct PEBS_counter **perfglobalstatus,
+    struct PEBS_counter **perfglobalovfctrl,
+    struct PEBS_counter **debugctl,
+    struct PEBS_counter **fixedctrctrl,
+    struct PEBS_counter **pebsenable,
+    struct PEBS_counter **pebsldlatthreshold,
+    struct PEBS_counter **miscenable,
+    struct PEBS_counter **perfcapabilities,
+    struct PEBS_counter **fixedctr0,
+    struct PEBS_counter **fixedctr1,
+    struct PEBS_counter **fixedctr2,
+    struct PEBS_counter **d5area,
+    off_t *msrs_PEBS_ctrs
 );
 /// @brief Initialize storage for fixed-function performance counter data, and
 /// store it on the heap.
@@ -76,6 +111,11 @@ void fixed_counter_storage(
 /// @param [out] ctr Data for fixed-function performance counters.
 void init_fixed_counter(
     struct fixed_counter *ctr
+);
+
+static int init_PEBS(
+    struct PEBS *evt,
+    off_t *msrs_pebs
 );
 
 /// @brief Set value of IA32_FIXED_CTR_CTL and IA32_PERF_GLOBAL_CTL and reset

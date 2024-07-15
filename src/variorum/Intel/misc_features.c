@@ -504,7 +504,7 @@ int set_turbo_on(off_t msr_misc_enable, unsigned int turbo_mode_disable_bit)
             return ret;
         }
 
-        /// Does the msr value have the turbo disable bit on?
+        // Does the msr value have the turbo disable bit on?
         if (msr_val == (msr_val | mask))
         {
             uint64_t write_val = msr_val & ~mask;

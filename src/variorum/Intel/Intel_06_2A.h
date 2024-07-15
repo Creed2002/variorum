@@ -90,10 +90,6 @@ int intel_cpu_fm_06_2a_cap_power_limits(
     int package_power_limit
 );
 
-int variorum_PEBS_print_l(
-    void
-);
-
 
 int intel_cpu_fm_06_2a_get_features(
     void

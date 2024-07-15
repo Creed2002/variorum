@@ -169,7 +169,6 @@ int variorum_monitoring(FILE *output)
 
 int variorum_PEBS_print_latency(void)
 {
-    //variorum_PEBS_print_l();
     int err = 0;
     int i;
     err = variorum_enter(__FILE__, __FUNCTION__, __LINE__);
@@ -187,7 +186,7 @@ int variorum_PEBS_print_latency(void)
                                    __FUNCTION__, __LINE__);
             continue;
         }
-        err = g_platform[i].variorum_PEBS_print_latency;
+        err = g_platform[i].variorum_PEBS_print_latency();
         if (err)
         {
             return -1;

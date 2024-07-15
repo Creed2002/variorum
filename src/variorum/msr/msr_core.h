@@ -102,6 +102,7 @@ enum variorum_data_type_e
     TURBO_RATIO_LIMIT_CORES = 34,
     TDP_DEFS = 35,
     TDP_CONFIG = 36,
+    PEBS_CONFIG = 37,
 };
 
 /// @brief Enum encompassing batch operations.

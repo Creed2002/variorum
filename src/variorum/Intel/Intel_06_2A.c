@@ -333,22 +333,6 @@ int intel_cpu_fm_06_2a_get_clocks_json(json_t *get_clock_obj_json)
     return 0;
 }
 
-int variorum_print_h_world(void)
-{
-    printf("Hello World\n");
-    return 0;
-}
-
-int variorum_PEBS_print_l(void)
-{
-    unsigned int PEBS_disable_bit = 1;
-    //PEBS_laten(msrs.ia32_pebs_enable, PEBS_disable_bit);
-    PEBS_laten(msrs.ia32_mperf, PEBS_disable_bit);
-    return 0;
-}
-
-
-
 
 int intel_cpu_fm_06_2a_get_power(int long_ver)
 {

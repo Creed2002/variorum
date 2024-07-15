@@ -71,7 +71,6 @@ int set_intel_func_ptrs(int idx)
     // Sandy Bridge 06_2A
     if (*g_platform[idx].arch_id == FM_06_2A)
     {
-        g_platform[idx].variorum_PEBS_print_latency =  variorum_PEBS_print_l;
         g_platform[idx].variorum_print_power_limit =
             intel_cpu_fm_06_2a_get_power_limits;
         g_platform[idx].variorum_cap_each_socket_power_limit =
