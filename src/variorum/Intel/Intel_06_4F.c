@@ -77,8 +77,15 @@ static struct broadwell_4f_offsets msrs =
 
 int variorum_PEBS_print_l2(void)
 {
+<<<<<<< HEAD
     unsigned int PEBS_disable_bit = 0;
     PEBS_laten(msrs.ia32_pebs_enable, PEBS_disable_bit);
+=======
+    unsigned int PEBS_disable_bit = 1;
+    //PEBS_laten(msrs.ia32_pebs_enable, PEBS_disable_bit);
+    printf("IM HERE \n");
+    PEBS_laten(msrs.ia32_mperf, PEBS_disable_bit);
+>>>>>>> c151a0f30eec5787676c7db1a978b43228d44ab5
     return 0;
 }
 
