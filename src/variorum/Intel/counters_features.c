@@ -82,157 +82,157 @@ int PEBS_laten(off_t msr, unsigned int PEBS_disable_bit)
     return 0;
 }
 
-void PEBS_counter_storage(struct PEBS_counter **ctr0, struct PEBS_counter **ctr1,
-                          struct PEBS_counter **ctr2, struct PEBS_counter **ctr3,
-                          struct PEBS_counter **perfevtsel0, struct PEBS_counter **perfevtsel1,
-                          struct PEBS_counter **perfevtsel2, struct PEBS_counter **perfevtsel3,
-                          struct PEBS_counter **perfglobalctrl, struct PEBS_counter **perfglobalstatus,
-                          struct PEBS_counter **perfglobalovfctrl, struct PEBS_counter **debugctl,
-                          struct PEBS_counter **fixedctrctrl, struct PEBS_counter **pebsenable,
-                          struct PEBS_counter **pebsldlatthreshold, struct PEBS_counter **miscenable,
-                          struct PEBS_counter **perfcapabilities, struct PEBS_counter **fixedctr0,
-                          struct PEBS_counter **fixedctr1, struct PEBS_counter **fixedctr2,
-                          struct PEBS_counter **d5area, off_t *msrs_PEBS_ctrs)
-{
-    static struct PEBS_counter c0, c1, c2, c3, pes0, pes1, pes2, pes3, pgc, pgs, pgoc, dc, fcc, pe, pllt, me, pc, fc0, fc1, fc2, da;
-
-    static int init = 0;
-    static unsigned nthreads;
-
-    if (!init)
-    {
-        init = 1;
-        variorum_get_topology(NULL, NULL, &nthreads, P_INTEL_CPU_IDX);
-        init_PEBS_counter(&c0);
-        init_PEBS_counter(&c1);
-        init_PEBS_counter(&c2);
-        init_PEBS_counter(&c3);
-        init_PEBS_counter(&pes0);
-        init_PEBS_counter(&pes1);
-        init_PEBS_counter(&pes2);
-        init_PEBS_counter(&pes3);
-        init_PEBS_counter(&pgc);
-        init_PEBS_counter(&pgs);
-        init_PEBS_counter(&pgoc);
-        init_PEBS_counter(&dc);
-        init_PEBS_counter(&fcc);
-        init_PEBS_counter(&pe);
-        init_PEBS_counter(&pllt);
-        init_PEBS_counter(&me);
-        init_PEBS_counter(&pc);
-        init_PEBS_counter(&fc0);
-        init_PEBS_counter(&fc1);
-        init_PEBS_counter(&fc2);
-        init_PEBS_counter(&da);
-        allocate_batch(PEBS_CONFIG, 21UL * nthreads);
-        load_thread_batch(msrs_PEBS_ctrs[0], c0.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[1], c1.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[2], c2.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[3], c3.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[4], pes0.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[5], pes1.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[6], pes2.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[7], pes3.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[8], pgc.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[8], pgs.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[10], pgoc.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[11], dc.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[12], fcc.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[13], pe.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[14], pllt.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[15], me.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[16], pc.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[17], fc0.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[18], fc1.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[19], fc2.value, PEBS_CONFIG);
-        load_thread_batch(msrs_PEBS_ctrs[20], da.value, PEBS_CONFIG);
-    }
-    if (ctr0 != NULL)
-    {
-        *ctr0 = &c0;
-    }
-    if (ctr1 != NULL)
-    {
-        *ctr1 = &c1;
-    }
-    if (ctr2 != NULL)
-    {
-        *ctr2 = &c2;
-    }
-    if (ctr3 != NULL)
-    {
-        *ctr3 = &c3;
-    }
-    if (perfevtsel0 != NULL)
-    {
-        *perfevtsel0 = &pes0;
-    }
-    if (perfevtsel1 != NULL)
-    {
-        *perfevtsel1 = &pes1;
-    }
-    if (perfevtsel2 != NULL)
-    {
-        *perfevtsel2 = &pes2;
-    }
-    if (perfevtsel3 != NULL)
-    {
-        *perfevtsel3 = &pes3;
-    }
-    if (perfglobalctrl != NULL)
-    {
-        *perfglobalctrl = &pgc;
-    }
-    if (perfglobalstatus != NULL)
-    {
-        *perfglobalstatus = &pgs;
-    }
-    if (perfglobalovfctrl != NULL)
-    {
-        *perfglobalovfctrl = &pgoc;
-    }
-    if (debugctl != NULL)
-    {
-        *debugctl = &dc;
-    }
-    if (fixedctrctrl != NULL)
-    {
-        *fixedctrctrl = &fcc;
-    }
-    if (pebsenable != NULL)
-    {
-        *pebsenable = &pe;
-    }
-    if (pebsldlatthreshold != NULL)
-    {
-        *pebsldlatthreshold = &pllt;
-    }
-    if (miscenable != NULL)
-    {
-        *miscenable = &me;
-    }
-    if (perfcapabilities != NULL)
-    {
-        *perfcapabilities = &pc;
-    }
-    if (fixedctr0 != NULL)
-    {
-        *fixedctr0 = &fc0;
-    }
-    if (fixedctr1 != NULL)
-    {
-        *fixedctr1 = &fc1;
-    }
-    if (fixedctr2 != NULL)
-    {
-        *fixedctr2 = &fc2;
-    }
-    if (d5area != NULL)
-    {
-        *d5area = &da;
-    }
-    write_batch(PEBS_CONFIG);
-}
+//void PEBS_counter_storage(struct PEBS_counter **ctr0, struct PEBS_counter **ctr1,
+//                          struct PEBS_counter **ctr2, struct PEBS_counter **ctr3,
+//                          struct PEBS_counter **perfevtsel0, struct PEBS_counter **perfevtsel1,
+//                          struct PEBS_counter **perfevtsel2, struct PEBS_counter **perfevtsel3,
+//                          struct PEBS_counter **perfglobalctrl, struct PEBS_counter **perfglobalstatus,
+//                          struct PEBS_counter **perfglobalovfctrl, struct PEBS_counter **debugctl,
+//                          struct PEBS_counter **fixedctrctrl, struct PEBS_counter **pebsenable,
+//                          struct PEBS_counter **pebsldlatthreshold, struct PEBS_counter **miscenable,
+//                          struct PEBS_counter **perfcapabilities, struct PEBS_counter **fixedctr0,
+//                          struct PEBS_counter **fixedctr1, struct PEBS_counter **fixedctr2,
+//                          struct PEBS_counter **d5area, off_t *msrs_PEBS_ctrs)
+//{
+//    static struct PEBS_counter c0, c1, c2, c3, pes0, pes1, pes2, pes3, pgc, pgs, pgoc, dc, fcc, pe, pllt, me, pc, fc0, fc1, fc2, da;
+//
+//    static int init = 0;
+//    static unsigned nthreads;
+//
+//    if (!init)
+//    {
+//        init = 1;
+//        variorum_get_topology(NULL, NULL, &nthreads, P_INTEL_CPU_IDX);
+//        init_PEBS_counter(&c0);
+//        init_PEBS_counter(&c1);
+//        init_PEBS_counter(&c2);
+//        init_PEBS_counter(&c3);
+//        init_PEBS_counter(&pes0);
+//        init_PEBS_counter(&pes1);
+//        init_PEBS_counter(&pes2);
+//        init_PEBS_counter(&pes3);
+//        init_PEBS_counter(&pgc);
+//        init_PEBS_counter(&pgs);
+//        init_PEBS_counter(&pgoc);
+//        init_PEBS_counter(&dc);
+//        init_PEBS_counter(&fcc);
+//        init_PEBS_counter(&pe);
+//        init_PEBS_counter(&pllt);
+//        init_PEBS_counter(&me);
+//        init_PEBS_counter(&pc);
+//        init_PEBS_counter(&fc0);
+//        init_PEBS_counter(&fc1);
+//        init_PEBS_counter(&fc2);
+//        init_PEBS_counter(&da);
+//        allocate_batch(PEBS_CONFIG, 21UL * nthreads);
+//        load_thread_batch(msrs_PEBS_ctrs[0], c0.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[1], c1.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[2], c2.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[3], c3.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[4], pes0.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[5], pes1.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[6], pes2.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[7], pes3.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[8], pgc.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[8], pgs.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[10], pgoc.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[11], dc.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[12], fcc.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[13], pe.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[14], pllt.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[15], me.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[16], pc.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[17], fc0.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[18], fc1.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[19], fc2.value, PEBS_CONFIG);
+//        load_thread_batch(msrs_PEBS_ctrs[20], da.value, PEBS_CONFIG);
+//    }
+//    if (ctr0 != NULL)
+//    {
+//        *ctr0 = &c0;
+//    }
+//    if (ctr1 != NULL)
+//    {
+//        *ctr1 = &c1;
+//    }
+//    if (ctr2 != NULL)
+//    {
+//        *ctr2 = &c2;
+//    }
+//    if (ctr3 != NULL)
+//    {
+//        *ctr3 = &c3;
+//    }
+//    if (perfevtsel0 != NULL)
+//    {
+//        *perfevtsel0 = &pes0;
+//    }
+//    if (perfevtsel1 != NULL)
+//    {
+//        *perfevtsel1 = &pes1;
+//    }
+//    if (perfevtsel2 != NULL)
+//    {
+//        *perfevtsel2 = &pes2;
+//    }
+//    if (perfevtsel3 != NULL)
+//    {
+//        *perfevtsel3 = &pes3;
+//    }
+//    if (perfglobalctrl != NULL)
+//    {
+//        *perfglobalctrl = &pgc;
+//    }
+//    if (perfglobalstatus != NULL)
+//    {
+//        *perfglobalstatus = &pgs;
+//    }
+//    if (perfglobalovfctrl != NULL)
+//    {
+//        *perfglobalovfctrl = &pgoc;
+//    }
+//    if (debugctl != NULL)
+//    {
+//        *debugctl = &dc;
+//    }
+//    if (fixedctrctrl != NULL)
+//    {
+//        *fixedctrctrl = &fcc;
+//    }
+//    if (pebsenable != NULL)
+//    {
+//        *pebsenable = &pe;
+//    }
+//    if (pebsldlatthreshold != NULL)
+//    {
+//        *pebsldlatthreshold = &pllt;
+//    }
+//    if (miscenable != NULL)
+//    {
+//        *miscenable = &me;
+//    }
+//    if (perfcapabilities != NULL)
+//    {
+//        *perfcapabilities = &pc;
+//    }
+//    if (fixedctr0 != NULL)
+//    {
+//        *fixedctr0 = &fc0;
+//    }
+//    if (fixedctr1 != NULL)
+//    {
+//        *fixedctr1 = &fc1;
+//    }
+//    if (fixedctr2 != NULL)
+//    {
+//        *fixedctr2 = &fc2;
+//    }
+//    if (d5area != NULL)
+//    {
+//        *d5area = &da;
+//    }
+//    write_batch(PEBS_CONFIG);
+//}
 
 
 
